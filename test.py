@@ -17,4 +17,5 @@ for _ in range(10):
     plt.imshow(X_test[idx])
     plt.title(f"Prediction = {pred_num}")
     plt.xlabel(f"Actual = {y_test[idx]}")
+
     plt.show()

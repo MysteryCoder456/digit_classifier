@@ -20,6 +20,7 @@ plt.imshow(img)
 # Create the model
 model = Sequential()
 model.add(InputLayer((784,)))
+model.add(Dense(256, activation="relu"))
 model.add(Dense(128, activation="relu"))
 model.add(Dense(10, activation="softmax"))
 
