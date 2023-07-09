@@ -1,0 +1,6 @@
+tensorflow
+tensorflow-metal  # for Macs with Apple Silion/AMD GPUs
+tensorboard
+matplotlib
+pandas
+numpy
