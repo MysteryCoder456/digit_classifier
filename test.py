@@ -10,11 +10,11 @@ model: Sequential = load_model("model.keras", compile=False)  # type: ignore
 # Test 10 random images
 for _ in range(10):
     idx = np.random.randint(len(X_test))
-    random_img = np.reshape(X_test[idx : idx + 1], (-1, 784))
-    pred = model.predict(random_img)
+    random_img = X_test[idx]
+    pred = model.predict(np.array([random_img]))
     pred_num = np.argmax(pred)
 
-    plt.imshow(X_test[idx])
+    plt.imshow(random_img)
     plt.title(f"Prediction = {pred_num}")
     plt.xlabel(f"Actual = {y_test[idx]}")
 
