@@ -46,7 +46,7 @@ model.fit(
     X_train,
     y_train,
     validation_data=(X_test, y_test),
-    epochs=50,
+    epochs=15,
     callbacks=[tensorboard_callback],
 )
 save_model(model, "model.keras", save_format="keras")
