@@ -38,18 +38,19 @@ model.add(Reshape((28, 28, 1)))
 
 # Convolutional Layers
 
-model.add(Conv2D(32, (3, 3), padding="same"))
+model.add(Conv2D(28, (4, 4), padding="same"))
 model.add(Activation("relu"))
 model.add(MaxPooling2D((2, 2)))
 model.add(Dropout(0.4))
 
-model.add(Conv2D(32, (3, 3), padding="same", strides=(2, 2)))
+model.add(Conv2D(56, (3, 3), padding="same"))
 model.add(Activation("relu"))
+model.add(MaxPooling2D((2, 2)))
 model.add(Dropout(0.3))
 
-model.add(Conv2D(64, (2, 2)))
+model.add(Conv2D(56, (3, 3)))
 model.add(Activation("relu"))
-model.add(Dropout(0.25))
+model.add(Dropout(0.35))
 
 # Neural Layers
 
