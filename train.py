@@ -2,7 +2,16 @@ from datetime import datetime
 import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential, save_model
-from keras.layers import Dense, Dropout, Flatten
+from keras.layers import (
+    Activation,
+    Conv2D,
+    Dense,
+    Dropout,
+    Flatten,
+    InputLayer,
+    MaxPooling2D,
+    Reshape,
+)
 from keras.optimizers.legacy import RMSprop
 from keras.callbacks import TensorBoard
 import matplotlib.pyplot as plt
@@ -24,7 +33,27 @@ tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
 model = Sequential()
 
 # Input Layer
-model.add(Flatten(input_shape=(28, 28)))
+model.add(InputLayer(input_shape=(28, 28)))
+model.add(Reshape((28, 28, 1)))
+
+# Convolutional Layers
+
+model.add(Conv2D(32, (3, 3), padding="same"))
+model.add(Activation("relu"))
+model.add(MaxPooling2D((2, 2)))
+model.add(Dropout(0.4))
+
+model.add(Conv2D(32, (3, 3), padding="same", strides=(2, 2)))
+model.add(Activation("relu"))
+model.add(Dropout(0.3))
+
+model.add(Conv2D(64, (2, 2)))
+model.add(Activation("relu"))
+model.add(Dropout(0.25))
+
+# Neural Layers
+
+model.add(Flatten())
 
 model.add(Dense(256, activation="relu"))
 model.add(Dropout(0.25))
