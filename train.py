@@ -1,4 +1,5 @@
 from datetime import datetime
+from keras.src.optimizers import SGD
 import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential, save_model
@@ -10,9 +11,10 @@ from keras.layers import (
     Flatten,
     InputLayer,
     MaxPooling2D,
+    AveragePooling2D,
     Reshape,
 )
-from keras.optimizers.legacy import RMSprop
+from keras.optimizers import RMSprop
 from keras.callbacks import TensorBoard
 import matplotlib.pyplot as plt
 
@@ -38,17 +40,17 @@ model.add(Reshape((28, 28, 1)))
 
 # Convolutional Layers
 
-model.add(Conv2D(28, (4, 4), padding="same"))
+model.add(Conv2D(58, (5, 5), padding="same"))
 model.add(Activation("relu"))
-model.add(MaxPooling2D((2, 2)))
+model.add(MaxPooling2D((3, 3)))
 model.add(Dropout(0.4))
 
-model.add(Conv2D(56, (3, 3), padding="same"))
+model.add(Conv2D(28, (3, 3), padding="same"))
 model.add(Activation("relu"))
-model.add(MaxPooling2D((2, 2)))
+model.add(AveragePooling2D((2, 2)))
 model.add(Dropout(0.3))
 
-model.add(Conv2D(56, (3, 3)))
+model.add(Conv2D(28, (2, 2)))
 model.add(Activation("relu"))
 model.add(Dropout(0.35))
 
@@ -59,16 +61,18 @@ model.add(Flatten())
 model.add(Dense(256, activation="relu"))
 model.add(Dropout(0.25))
 
-model.add(Dense(128, activation="relu"))
+model.add(Dense(256, activation="relu"))
 model.add(Dropout(0.25))
 
 # Output Layer
 model.add(Dense(10, activation="softmax"))
 
 # Compile, train and save the model
-optimizer = RMSprop(learning_rate=15e-5, decay=1e-6)
+# rms_prop = RMSprop(learning_rate=3e-4, epsilon=1e-6)
+sgd = SGD(learning_rate=7e-4, momentum=0.9)
+
 model.compile(
-    optimizer=optimizer,
+    optimizer=sgd,
     loss="sparse_categorical_crossentropy",
     metrics=["accuracy"],
 )
