@@ -40,8 +40,8 @@ model.add(Reshape((28, 28, 1)))
 
 model.add(Conv2D(58, (5, 5), padding="same"))
 model.add(Activation("relu"))
-model.add(AveragePooling2D((3, 3)))
-model.add(Dropout(0.4))
+model.add(AveragePooling2D((3, 3), padding="same"))
+model.add(Dropout(0.2))
 
 model.add(Conv2D(28, (3, 3), padding="same"))
 model.add(Activation("relu"))
@@ -50,17 +50,17 @@ model.add(Dropout(0.3))
 
 model.add(Conv2D(28, (2, 2)))
 model.add(Activation("relu"))
-model.add(Dropout(0.35))
+model.add(Dropout(0.3))
 
 # Neural Layers
 
 model.add(Flatten())
 
 model.add(Dense(256, activation="relu"))
-model.add(Dropout(0.25))
+model.add(Dropout(0.2))
 
 model.add(Dense(256, activation="relu"))
-model.add(Dropout(0.25))
+model.add(Dropout(0.2))
 
 # Output Layer
 model.add(Dense(10, activation="softmax"))
