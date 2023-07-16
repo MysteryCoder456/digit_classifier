@@ -1,5 +1,4 @@
 from datetime import datetime
-from keras.src.optimizers import SGD
 import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential, save_model
@@ -10,11 +9,10 @@ from keras.layers import (
     Dropout,
     Flatten,
     InputLayer,
-    MaxPooling2D,
     AveragePooling2D,
     Reshape,
 )
-from keras.optimizers import RMSprop
+from keras.optimizers import RMSprop, SGD
 from keras.callbacks import TensorBoard
 import matplotlib.pyplot as plt
 
@@ -42,7 +40,7 @@ model.add(Reshape((28, 28, 1)))
 
 model.add(Conv2D(58, (5, 5), padding="same"))
 model.add(Activation("relu"))
-model.add(MaxPooling2D((3, 3)))
+model.add(AveragePooling2D((3, 3)))
 model.add(Dropout(0.4))
 
 model.add(Conv2D(28, (3, 3), padding="same"))
